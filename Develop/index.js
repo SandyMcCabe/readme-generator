@@ -24,12 +24,12 @@ const questions = () => {
         {
             type: 'input',
             name: 'github',
-            message: 'Enter your GitHub Username (Required)',
+            message: 'Enter your GitHub Page? (Required)',
             validate: githubInput => {
                 if (githubInput) {
                     return true;
                 } else {
-                    console.log('Please enter your GitHub username!');
+                    console.log('Please enter your GitHub Page!');
                     return false;
                 }
             }
@@ -100,9 +100,9 @@ const questions = () => {
         },
         {
             type: 'list',
-            name: 'licenses',
+            name: 'license',
             message: 'What type of license applies to this code? (Check all that apply)',
-            choices: ['MIT', 'GPL', 'MSD', 'Apache', 'none']
+            choices: ['MIT', 'GPL', 'Apache', 'none']
         },
     ]);
 };
@@ -132,6 +132,7 @@ function init() {
     .then(mdData => {
         return writeToFile(mdData);
     })
+    .catch(err => console.error(err))
 }
 
 // Function call to initialize app
@@ -140,22 +141,3 @@ init();
 
 
 
-
-// promptUser()
-//   .then(promptProject)
-//   .then(portfolioData => {
-//     return generatePage(portfolioData);
-//   })
-//   .then(pageHTML => {
-//     return writeFile(pageHTML);
-//   })
-//   .then(writeFileResponse => {
-//     console.log(writeFileResponse);
-//     return copyFile();
-//   })
-//   .then(copyFileResponse => {
-//     console.log(copyFileResponse);
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });

@@ -1,6 +1,3 @@
-var TOCList = "";
-
-
 
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
@@ -15,7 +12,7 @@ function renderLicenseBadge(license) {
     return '[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)';
 
   } else if (license === "none") {
-    return ""
+    return ''
   }
 }
 
@@ -40,80 +37,95 @@ function renderLicenseLink(license) {
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
   if (license === "none") {
-    return ``
+  return  `
+  # License  
+
+  ### No license was used
+  <br />
+     `
   } else {
-
     var link = renderLicenseLink(license)
-
-    return `
+  
+  return  `
   # License  
 
   ### [${license}](${link})
-  <br /><br />
-  `
+  <br />
+   `
+  };
+}
+
+function renderTOC(data, label) {
+  if (!data) {
+    return ''
+  } else {
+  return `
+  ### [${label}](#${label.toLowerCase()})
+  
+  `;
   }
-};
+}
 
 function renderMd(data, title) {
   if (!data) {
-    return ``
-  } else {
-    if (!TOCList){
-      TOCList = title
-    }else{
-      TOCList += ('     ' + title)
-    }
-    return `
-  # ${title} 
-  
-  ### ${data}  
-  $~$
-  $~$ 
-  <br /><br />
+    return ''
+  }else {
+    
+ return  `
+   # ${title}
+ 
+   ### ${data}
 
-  `
-  }
-};
+   <br />
+    `
+   }
 
-
+      } 
+    
 
 // TODO: Create a function to generate markdown for README
 module.exports = function generateMarkdown(data) {
   return `
   # ${data.title}   
   ${renderLicenseBadge(data.license)}      
-  
-    
+      
   # Description    
      
   ### ${data.description}   
-  <br /><br />
+  <br />
 
-  # Table of Contents 
-  ### [Description]
-  ### ${[TOCList]}
-  ### [Questions]
+  # Table of Contents
+  ${renderTOC(data.installation, 'Installation')}
+  ${renderTOC(data.usage, "Usage")}      
+  ${renderTOC(data.contribution, "Contribution")}
+  ${renderTOC(data.features, "Features")}
+  ${renderTOC(data.test, 'Tests')}          
+  ${renderTOC(data.license, 'License')}     
+  ### [Questions](#questions)
 
-  ${renderMd(data.installation, 'Installation Instructions')}    
-  ${renderMd(data.usage, "Usage Instructions")}      
-  ${renderMd(data.contribution, "Contribution Credits")}
+<br />
+
+  ${renderMd(data.installation, 'Installation')}    
+  ${renderMd(data.usage, "Usage")}      
+  ${renderMd(data.contribution, "Contribution")}
   ${renderMd(data.features, "Features")}
   ${renderMd(data.test, 'Tests')}          
   ${renderLicenseSection(data.license)}        
- 
+
   # Questions
-
+  
   If you have any questions, please feel free to email me.
-  ### ${data.email}
-  <br /><br />
-  Here is my GitHub page
-  ### ${data.github}
-  <br /><br />
-  Thank you,
-  ### ${data.name}
-
-`;
-
+  ### ${data.email}  
+  
+  Here is my GitHub page  
+  
+  ### ${data.github}  
+  
+  Thank you,  
+  
+  ### ${data.name}  
+  
+  `;
+  
 };
-
 

@@ -50,11 +50,12 @@ function renderLicenseSection(license) {
   # License  
 
   ### [${license}](${link})
-  <br />
+  <br />  
    `
   };
 }
 
+// Dynamically creates the Table of Contents
 function renderTOC(data, label) {
   if (!data) {
     return ''
@@ -66,6 +67,7 @@ function renderTOC(data, label) {
   }
 }
 
+// Dynamically creates the various sections
 function renderMd(data, title) {
   if (!data) {
     return ''
@@ -85,47 +87,47 @@ function renderMd(data, title) {
 
 // TODO: Create a function to generate markdown for README
 module.exports = function generateMarkdown(data) {
-  return `
-  # ${data.title}   
-  ${renderLicenseBadge(data.license)}      
-      
-  # Description    
+return `
+# ${data.title}   
+${renderLicenseBadge(data.license)}      
+    
+# Description    
      
-  ### ${data.description}   
-  <br />
+### ${data.description}   
+<br />
 
-  # Table of Contents
-  ${renderTOC(data.installation, 'Installation')}
-  ${renderTOC(data.usage, "Usage")}      
-  ${renderTOC(data.contribution, "Contribution")}
-  ${renderTOC(data.features, "Features")}
-  ${renderTOC(data.test, 'Tests')}          
-  ${renderTOC(data.license, 'License')}     
-  ### [Questions](#questions)
+# Table of Contents
+${renderTOC(data.installation, 'Installation')}
+${renderTOC(data.usage, "Usage")}      
+${renderTOC(data.contribution, "Contribution")}
+${renderTOC(data.features, "Features")}
+${renderTOC(data.test, 'Tests')}          
+${renderTOC(data.license, 'License')}     
+### [Questions](#questions)
 
 <br />
 
-  ${renderMd(data.installation, 'Installation')}    
-  ${renderMd(data.usage, "Usage")}      
-  ${renderMd(data.contribution, "Contribution")}
-  ${renderMd(data.features, "Features")}
-  ${renderMd(data.test, 'Tests')}          
-  ${renderLicenseSection(data.license)}        
+${renderMd(data.installation, 'Installation')}    
+${renderMd(data.usage, "Usage")}      
+${renderMd(data.contribution, "Contribution")}
+${renderMd(data.features, "Features")}
+${renderMd(data.test, 'Tests')}          
+${renderLicenseSection(data.license)}        
 
-  # Questions
+# Questions
   
-  If you have any questions, please feel free to email me.
-  ### ${data.email}  
+If you have any questions, please feel free to email me.
+### ${data.email}  
   
-  Here is my GitHub page  
+Here is my GitHub page  
   
-  ### ${data.github}  
+### ${data.github}  
   
-  Thank you,  
+Thank you,  
   
-  ### ${data.name}  
+### ${data.name}  
   
-  `;
+`;
   
 };
 
